@@ -15,8 +15,8 @@ export const  Login = () => {
       signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
       navigate("/")
-    // Signed in 
-    //console.log(userCredential)
+    //Signed in 
+    console.log(userCredential)
     // ...
   })
   .catch((error) => {
@@ -77,3 +77,5 @@ function CustomLink({to, children, ...props}){
             </li>
         )
     }
+
+    

@@ -10,9 +10,7 @@ export default function Navbar() {
             <img src ="/images/logo.png" alt="windyroad"/>
             </Link>
         <ul>
-            <Authentication/>
-            
-                       
+            <Authentication/>  
         </ul>
         </nav>
     )

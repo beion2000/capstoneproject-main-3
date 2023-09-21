@@ -5,7 +5,7 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom"
 import { onAuthStateChanged, signOut } from "firebase/auth"
 
 const Authentication = () => {
-    const [authenticatedUser, setauthenticatedUser] = useState("")
+    const [authenticatedUser, setauthenticatedUser] = useState("null")
 
     useEffect(() => {
         const listenAuth = onAuthStateChanged(auth, (user) => {
@@ -14,40 +14,40 @@ const Authentication = () => {
             } else{
                 setauthenticatedUser(null)
             }
-        }
-        )
+        });
         return () => {
             listenAuth();
-        }
-    },[])
+        };
+    },[]);
 
     const userSignOut = () => {
-        signOut(auth).then(()=>{
+        signOut(auth)
+        .then(()=>{
             console.log("user signed out")
-        }).catch(error => console.log("error"))
-    }
+        })
+        .catch(error => console.log("error"))
+    };
 
     return (
         <>
-        { authenticatedUser === null ?
+        {authenticatedUser === null ? (
             <>
                 <CustomLink to ="/login">Login</CustomLink>
                 <CustomLink to ="/registration">Sign Up</CustomLink>
-           </>:
+                
+                
+           </>
+        ) : (
            <>
                 <CustomLink to ="/" onClick={userSignOut}>Sign Out</CustomLink>
                 <CustomLink to ="/RequestRide">Request Ride</CustomLink>
                 <CustomLink to ="/myaccount">My Account</CustomLink>  
-                <CustomLink to ="/RideHistory">Ride History</CustomLink>  
-
-                
+                <CustomLink to ="/RideHistory">Ride History</CustomLink>       
            </>
-           }
-            
+           )}    
         </>
-        
-    )
-}
+    );
+};
 
 function CustomLink({to, children, ...props}){
 const resolvedPath = useResolvedPath(to)  
